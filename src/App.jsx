@@ -33,6 +33,7 @@ const BeforeRouterEnter = () => {
   if (location.pathname !== "/login" && !token) {
     return <ToLogin />;
   }
+  console.log(location,routes)
   getCurrentPageTitle(location.pathname, routes, "path");
   return outlet;
 };

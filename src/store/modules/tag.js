@@ -1,5 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { persistStore, persistReducer } from "redux-persist";
 export const tagSlice = createSlice({
   name: "tag",
   initialState: {
@@ -17,7 +16,6 @@ export const tagSlice = createSlice({
       }
     },
     edit: (state, { payload }) => {
-      // console.log(payload, "payload");
       const { type, key } = payload;
       const index = state.items.findIndex((item) => item.key === key);
       switch (type) {

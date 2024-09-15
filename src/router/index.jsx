@@ -51,6 +51,11 @@ export const routes = [
           },
         ],
       },
+      {
+        path: "setting",
+        title: "设置",
+        element: <Home />,
+      },
     ],
   },
   {
