@@ -14,11 +14,12 @@ const Sider = ({ collapsed }) => {
       .split("/")
       .filter((item) => item && item.trim())
       .map((item) => "/" + item);
-
     if (keys.length) {
       setSelectedKeys(keys);
       if (keys.length > 1) {
-        setOpenKeys(keys.slice(0, keys.length - 1));
+        if (!collapsed) {
+          setOpenKeys(keys.slice(0, keys.length - 1));
+        }
       } else {
         setOpenKeys([]);
       }
@@ -28,10 +29,6 @@ const Sider = ({ collapsed }) => {
     const path = keyPath.reverse().join("");
     navigate(path);
   };
-  // const handleonOpenChange = (keys) => {
-  //   //展开和回收的事件
-  //   setOpenKeys(keys);
-  // };
   const getMenus = async () => {
     const { data } = await getMenusApi();
     setItems(data);

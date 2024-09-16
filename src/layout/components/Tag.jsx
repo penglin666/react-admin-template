@@ -10,17 +10,22 @@ import {
   CloseCircleOutlined,
   EllipsisOutlined,
 } from "@ant-design/icons";
+
+import usePageRefresh from "@/hooks/usePageRefresh";
 const Tag = () => {
+  const pageRefresh = usePageRefresh();
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { items, activeKey } = useSelector((state) => state.tag);
   useEffect(() => {
     navigate(activeKey);
   }, [activeKey]);
+
   return (
     <Tabs
       type="editable-card"
       size="small"
+      tabBarGutter={6}
       hideAdd
       activeKey={activeKey}
       items={items}
@@ -28,51 +33,42 @@ const Tag = () => {
       onChange={(path) => navigate(path)}
       tabBarExtraContent={
         <Space.Compact>
-          <Tooltip title="刷新当前">
-            <Button icon={<ReloadOutlined />} />
+          <Tooltip title="刷新" placement="bottom">
+            <Button icon={<ReloadOutlined />} onClick={pageRefresh} />
           </Tooltip>
           <Dropdown
             placement="bottomRight"
             menu={{
+              onClick: ({ key }) =>
+                dispatch(edit({ type: key, key: location.pathname })),
               items: [
                 {
                   key: "closeCurrent",
                   label: "关闭当前",
                   icon: <CloseOutlined />,
-                  onClick: ({ key }) =>
-                    dispatch(edit({ type: key, key: location.pathname })),
                 },
                 {
                   key: "closeLeft",
                   label: "关闭左侧",
                   icon: <ArrowLeftOutlined />,
-                  onClick: ({ key }) =>
-                    dispatch(edit({ type: key, key: location.pathname })),
                 },
                 {
                   key: "closeRight",
                   label: "关闭右侧",
                   icon: <ArrowRightOutlined />,
-                  onClick: ({ key }) =>
-                    dispatch(edit({ type: key, key: location.pathname })),
                 },
                 {
                   key: "closeOther",
                   label: "关闭其它",
                   icon: <MinusCircleOutlined />,
-                  onClick: ({ key }) =>
-                    dispatch(edit({ type: key, key: location.pathname })),
                 },
                 {
                   key: "closeAll",
                   label: "关闭全部",
                   icon: <CloseCircleOutlined />,
-                  onClick: ({ key }) =>
-                    dispatch(edit({ type: key, key: location.pathname })),
                 },
               ],
             }}
-            trigger={["click"]}
           >
             <Button icon={<EllipsisOutlined />} />
           </Dropdown>

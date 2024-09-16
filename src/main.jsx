@@ -10,15 +10,15 @@ import App from "./App.jsx";
 import "./global.scss";
 
 createRoot(document.getElementById("root")).render(
-  <StrictMode>
-    <BrowserRouter>
-      <Provider store={store}>
-        <PersistGate loading={null} persistor={persistStore(store)}>
-          <ConfigProvider theme={{ cssVar: true }}>
-            <App />
-          </ConfigProvider>
-        </PersistGate>
-      </Provider>
-    </BrowserRouter>
-  </StrictMode>
+  // <StrictMode>
+  <BrowserRouter>
+    <Provider store={store}>
+      <PersistGate loading={null} persistor={persistStore(store)}>
+        <ConfigProvider theme={{ cssVar: true }}>
+          <App />
+        </ConfigProvider>
+      </PersistGate>
+    </Provider>
+  </BrowserRouter>
+  // </StrictMode>
 );

@@ -1,13 +1,16 @@
-import React from "react";
 import { Button, Checkbox, Form, Input } from "antd";
+import { useDispatch } from "react-redux";
+import { set } from "@/store/modules/user";
 import { loginApi } from "@/api/user";
-import storage from "../../utils/storage";
+import storage from "@/utils/storage";
 
 const Login = () => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const onFinish = (values) => {
     loginApi(values).then((res) => {
       storage.setSessionStorage("token", res.data.data.token);
+      dispatch(set(res.data.data));
       navigate("/home");
     });
   };

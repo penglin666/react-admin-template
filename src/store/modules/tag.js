@@ -8,12 +8,10 @@ export const tagSlice = createSlice({
   reducers: {
     add: (state, { payload }) => {
       const isExist = state.items.some((item) => item.key === payload.key);
-      if (isExist) {
-        state.activeKey = payload.key;
-      } else {
-        state.activeKey = payload.key;
+      if (!isExist) {
         state.items.push(payload);
       }
+      state.activeKey = payload.key;
     },
     edit: (state, { payload }) => {
       const { type, key } = payload;
@@ -44,8 +42,12 @@ export const tagSlice = createSlice({
           break;
       }
     },
+    clear: (state) => {
+      state.items = [];
+      state.activeKey = "";
+    },
   },
 });
 // 每个 case reducer 函数会生成对应的 Action creators
-export const { add, edit } = tagSlice.actions;
+export const { add, edit, clear } = tagSlice.actions;
 export default tagSlice.reducer;
