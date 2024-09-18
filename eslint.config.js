@@ -34,8 +34,6 @@ export default [
         "warn",
         { allowConstantExport: true },
       ],
-      // quotes: ['error', 'single'],
-      // semi: ['error','off']
     },
   },
 ];
